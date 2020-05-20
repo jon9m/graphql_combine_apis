@@ -1,7 +1,6 @@
 package com.nab.ebpo.documents;
 
 import com.nab.ebpo.documents.repository.entity.CustomerDetail;
-import com.nab.ebpo.documents.repository.entity.Phone;
 import com.nab.ebpo.documents.service.auxi.CustomerCoreService;
 import com.nab.ebpo.documents.service.auxi.CustomerEmailService;
 import com.nab.ebpo.documents.service.auxi.CustomerPhoneService;
@@ -29,18 +28,29 @@ public class GraphQLDataFetchers {
     }
 
     public DataFetcher getEmailDataFetcher() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return dataFetchingEnvironment -> {
             CustomerDetail customer = dataFetchingEnvironment.getSource();
-            String customerId = customer.getId();
-            return customerPhoneService.getCustomerPhoneById(customerId);
+            String emailId = customer.getId();
+            return emailService.getEmailById(emailId);
+
         };
     }
 
     public DataFetcher getPhoneDataFetcher() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return dataFetchingEnvironment -> {
-            Phone phone = dataFetchingEnvironment.getSource();
-            String emailId = phone.getId();
-            return emailService.getEmailById(emailId);
+            CustomerDetail customer = dataFetchingEnvironment.getSource();
+            String customerId = customer.getId();
+            return customerPhoneService.getCustomerPhoneById(customerId);
         };
     }
 }
