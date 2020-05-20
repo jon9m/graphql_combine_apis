@@ -22,7 +22,7 @@ public class CustomerPhoneRepository {
     @HystrixCommand(commandKey = "phone")
     public Phone getPhoneDetails(String id) {
         return webClient.get()
-                .uri("/phone")
+                .uri("/phone/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve().bodyToMono(Phone.class)

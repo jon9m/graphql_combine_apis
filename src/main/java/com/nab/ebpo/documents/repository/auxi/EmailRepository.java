@@ -22,7 +22,7 @@ public class EmailRepository {
     @HystrixCommand(commandKey = "email")
     public Email getEmail(String id) {
         return webClient.get()
-                .uri("/email")
+                .uri("/email/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve().bodyToMono(Email.class)

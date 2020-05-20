@@ -43,11 +43,11 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
-                .type(newTypeWiring("Query"))
-//                        .dataFetcher("customerById", graphQLDataFetchers.getCustomerByIdDataFetcher()))
-//                .type(newTypeWiring("CustomerDetails")
-//                        .dataFetcher("email", graphQLDataFetchers.getEmailDataFetcher())
-//                        .dataFetcher("phone", graphQLDataFetchers.getPhoneDataFetcher()))
+                .type(newTypeWiring("Query")
+                .dataFetcher("customerById", graphQLDataFetchers.getCustomerByIdDataFetcher()))
+                .type(newTypeWiring("CustomerDetails")
+                .dataFetcher("email", graphQLDataFetchers.getEmailDataFetcher())
+                .dataFetcher("phone", graphQLDataFetchers.getPhoneDataFetcher()))
                 .build();
     }
 

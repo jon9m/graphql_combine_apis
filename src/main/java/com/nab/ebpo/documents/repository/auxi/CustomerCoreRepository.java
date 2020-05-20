@@ -1,6 +1,5 @@
 package com.nab.ebpo.documents.repository.auxi;
 
-import com.nab.ebpo.documents.db.CustomerRepo;
 import com.nab.ebpo.documents.repository.entity.CustomerDetail;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -19,12 +18,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class CustomerCoreRepository {
 
     private final WebClient webClient = WebClient.create("http://localhost:8080");
-    private CustomerRepo customerRepo;
 
     @HystrixCommand(commandKey = "customer")
     public CustomerDetail getCustomerDetails(String id) {
         return webClient.get()
-                .uri("/customer")
+                .uri("/customer/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve().bodyToMono(CustomerDetail.class)
