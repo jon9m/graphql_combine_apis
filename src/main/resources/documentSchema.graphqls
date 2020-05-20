@@ -1,0 +1,25 @@
+type Query {
+    customerById(id: ID): CustomerDetails
+}
+
+type Email {
+    id: ID
+    primaryEmail: String
+    secondaryEmail: String
+}
+
+type Phone {
+    id: ID
+    phoneNumber: String
+    phoneType: String
+}
+
+type CustomerDetails {
+    id: ID
+    firstName: String
+    lastName: String
+    customerType: String
+    gender: String
+    email: Email
+    phone: Phone
+}
